@@ -81,17 +81,13 @@ function Clientes() {
       <div className="md:hidden space-y-3">
         {clientes.map(c => (
           <div key={c.cedula} className="bg-white rounded-lg shadow p-4">
-            <div className="flex justify-between items-start">
-              <div>
-                <p className="font-semibold">{c.nombre}</p>
-                <p className="text-sm text-gray-500">CC: {c.cedula}</p>
-                <p className="text-sm text-gray-500">{c.telefono} · {c.email}</p>
-                {c.direccion && <p className="text-sm text-gray-500">{c.direccion}</p>}
-              </div>
-              <div className="flex flex-col gap-1 ml-2">
-                <button onClick={() => editarCliente(c)} className="bg-blue-500 text-white px-3 py-1 rounded text-sm">Editar</button>
-                <button onClick={() => eliminarCliente(c.cedula)} className="bg-red-500 text-white px-3 py-1 rounded text-sm">Eliminar</button>
-              </div>
+            <p className="font-semibold">{c.nombre}</p>
+            <p className="text-sm text-gray-500">CC: {c.cedula}</p>
+            <p className="text-sm text-gray-500">{c.telefono} · {c.email}</p>
+            {c.direccion && <p className="text-sm text-gray-500">{c.direccion}</p>}
+            <div className="flex gap-2 mt-3">
+              <button onClick={() => editarCliente(c)} className="bg-blue-500 text-white px-3 py-1 rounded text-sm">Editar</button>
+              <button onClick={() => eliminarCliente(c.cedula)} className="bg-red-500 text-white px-3 py-1 rounded text-sm">Eliminar</button>
             </div>
           </div>
         ))}

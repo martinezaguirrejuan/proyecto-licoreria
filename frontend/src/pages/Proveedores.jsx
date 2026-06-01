@@ -81,17 +81,13 @@ function Proveedores() {
       <div className="md:hidden space-y-3">
         {proveedores.map(p => (
           <div key={p.nit} className="bg-white rounded-lg shadow p-4">
-            <div className="flex justify-between items-start">
-              <div>
-                <p className="font-semibold">{p.nombre_empresa}</p>
-                <p className="text-sm text-gray-500">NIT: {p.nit}</p>
-                <p className="text-sm text-gray-500">{p.telefono} · {p.email}</p>
-                {p.persona_contacto && <p className="text-sm text-gray-500">Contacto: {p.persona_contacto}</p>}
-              </div>
-              <div className="flex flex-col gap-1 ml-2">
-                <button onClick={() => editarProveedor(p)} className="bg-blue-500 text-white px-3 py-1 rounded text-sm">Editar</button>
-                <button onClick={() => eliminarProveedor(p.nit)} className="bg-red-500 text-white px-3 py-1 rounded text-sm">Eliminar</button>
-              </div>
+            <p className="font-semibold">{p.nombre_empresa}</p>
+            <p className="text-sm text-gray-500">NIT: {p.nit}</p>
+            <p className="text-sm text-gray-500">{p.telefono} · {p.email}</p>
+            {p.persona_contacto && <p className="text-sm text-gray-500">Contacto: {p.persona_contacto}</p>}
+            <div className="flex gap-2 mt-3">
+              <button onClick={() => editarProveedor(p)} className="bg-blue-500 text-white px-3 py-1 rounded text-sm">Editar</button>
+              <button onClick={() => eliminarProveedor(p.nit)} className="bg-red-500 text-white px-3 py-1 rounded text-sm">Eliminar</button>
             </div>
           </div>
         ))}
