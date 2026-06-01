@@ -12,6 +12,9 @@ const productosRoutes = require('./routes/productos');
 
 app.use('/productos', productosRoutes);
 
+const clientesRoutes = require('./routes/clientes');
+  app.use('/clientes', clientesRoutes);    
+
 app.get('/', (req, res) => {
   res.json({ mensaje: 'Backend Licorería funcionando' });
 });
