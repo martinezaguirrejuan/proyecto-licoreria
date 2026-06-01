@@ -50,7 +50,7 @@ function Productos() {
   }
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Productos</h1>
 
       <button
@@ -63,7 +63,7 @@ function Productos() {
       {mostrarFormulario && (
         <div className="bg-white p-6 rounded-lg shadow mb-6">
           <h2 className="text-xl font-bold mb-4">{productoEditando ? 'Editar producto' : 'Nuevo producto'}</h2>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <input placeholder="Nombre" value={form.nombre} className="border p-2 rounded" onChange={e => setForm({...form, nombre: e.target.value})} />
             <select value={form.tipo_licor} className="border p-2 rounded" onChange={e => setForm({...form, tipo_licor: e.target.value})}>
               <option value="">Tipo licor</option>
@@ -98,6 +98,7 @@ function Productos() {
         </div>
       )}
 
+      <div className="overflow-x-auto">
       <table className="w-full bg-white rounded-lg shadow">
         <thead className="bg-gray-800 text-white">
           <tr>
@@ -137,6 +138,7 @@ function Productos() {
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   )
 }

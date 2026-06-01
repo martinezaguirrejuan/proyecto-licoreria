@@ -50,7 +50,7 @@ function Proveedores() {
   }
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Proveedores</h1>
 
       <button
@@ -63,7 +63,7 @@ function Proveedores() {
       {mostrarFormulario && (
         <div className="bg-white p-6 rounded-lg shadow mb-6">
           <h2 className="text-xl font-bold mb-4">{proveedorEditando ? 'Editar proveedor' : 'Nuevo proveedor'}</h2>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <input placeholder="NIT" value={form.nit} disabled={!!proveedorEditando} className="border p-2 rounded" onChange={e => setForm({...form, nit: e.target.value})} />
             <input placeholder="Nombre empresa" value={form.nombre_empresa} className="border p-2 rounded" onChange={e => setForm({...form, nombre_empresa: e.target.value})} />
             <input placeholder="Teléfono" value={form.telefono} className="border p-2 rounded" onChange={e => setForm({...form, telefono: e.target.value})} />
@@ -77,6 +77,7 @@ function Proveedores() {
         </div>
       )}
 
+      <div className="overflow-x-auto">
       <table className="w-full bg-white rounded-lg shadow">
         <thead className="bg-gray-800 text-white">
           <tr>
@@ -104,6 +105,7 @@ function Proveedores() {
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   )
 }

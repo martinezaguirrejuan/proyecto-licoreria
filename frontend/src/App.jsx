@@ -13,7 +13,7 @@ function App() {
     <BrowserRouter>
       <div className="flex min-h-screen bg-gray-100">
         <Sidebar />
-        <div className="flex-1">
+        <div className="flex-1 pt-12 md:pt-0">
           <Routes>
             <Route path="/" element={<Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={<Dashboard />} />

@@ -145,7 +145,7 @@ function Ventas() {
   }
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Ventas</h1>
 
       <button
@@ -163,7 +163,7 @@ function Ventas() {
         <div className="bg-white p-6 rounded-lg shadow mb-6">
           <h2 className="text-xl font-bold mb-4">Nueva venta</h2>
 
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <select value={form.cedula_cliente} className="border p-2 rounded" onChange={e => setForm({...form, cedula_cliente: e.target.value})}>
               <option value="">-- Cliente (opcional) --</option>
               {clientes.map(c => (
@@ -258,6 +258,7 @@ function Ventas() {
         </div>
       )}
 
+      <div className="overflow-x-auto">
       <table className="w-full bg-white rounded-lg shadow">
         <thead className="bg-gray-800 text-white">
           <tr>
@@ -344,6 +345,7 @@ function Ventas() {
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   )
 }
