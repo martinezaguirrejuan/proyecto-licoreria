@@ -14,6 +14,8 @@ function Sidebar() {
         <NavLink to="/clientes" className={({ isActive }) => isActive ? activo : inactivo}>Clientes</NavLink>
         <NavLink to="/proveedores" className={({ isActive }) => isActive ? activo : inactivo}>Proveedores</NavLink>
         <NavLink to="/empleados" className={({ isActive }) => isActive ? activo : inactivo}>Empleados</NavLink>
+        <NavLink to="/ventas" className={({ isActive }) => isActive ? activo : inactivo}>Ventas</NavLink>
+        <NavLink to="/compras" className={({ isActive }) => isActive ? activo : inactivo}>Compras</NavLink>
       </nav>
     </div>
   )
