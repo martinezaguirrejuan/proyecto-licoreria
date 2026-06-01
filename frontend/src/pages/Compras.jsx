@@ -166,10 +166,10 @@ function Compras() {
                   <option key={p.id_producto} value={p.id_producto}>{p.nombre}</option>
                 ))}
               </select>
-              <div className="flex gap-2">
-                <input type="number" min="1" placeholder="Cantidad" value={cantidad} onChange={e => setCantidad(parseInt(e.target.value))} className="border p-2 rounded flex-1" />
-                <input type="number" min="0" placeholder="Precio unitario" value={precioUnitario} onChange={e => setPrecioUnitario(e.target.value)} className="border p-2 rounded flex-1" />
-                <button onClick={agregarAlCarrito} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Agregar</button>
+              <div className="grid grid-cols-3 gap-2">
+                <input type="number" min="1" placeholder="Cantidad" value={cantidad} onChange={e => setCantidad(parseInt(e.target.value))} className="border p-2 rounded" />
+                <input type="number" min="0" placeholder="Precio unitario" value={precioUnitario} onChange={e => setPrecioUnitario(e.target.value)} className="border p-2 rounded" />
+                <button onClick={agregarAlCarrito} className="bg-blue-600 text-white px-2 py-2 rounded hover:bg-blue-700">Agregar</button>
               </div>
             </div>
           </div>

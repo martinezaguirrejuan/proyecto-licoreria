@@ -203,16 +203,16 @@ function Ventas() {
                   <option key={p.id_producto} value={p.id_producto}>{p.nombre} — ${Number(p.precio_venta).toLocaleString()}</option>
                 ))}
               </select>
-              <div className="flex gap-2">
+              <div className="grid grid-cols-3 gap-2">
                 <input
                   type="number"
                   min="1"
                   value={cantidad}
                   onChange={e => setCantidad(parseInt(e.target.value))}
-                  className="border p-2 rounded flex-1"
+                  className="border p-2 rounded col-span-2"
                   placeholder="Cantidad"
                 />
-                <button onClick={agregarAlCarrito} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Agregar</button>
+                <button onClick={agregarAlCarrito} className="bg-blue-600 text-white px-2 py-2 rounded hover:bg-blue-700">Agregar</button>
               </div>
             </div>
             {productoSeleccionado && (() => {
