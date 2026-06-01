@@ -41,36 +41,71 @@ function Dashboard() {
           <h2 className="text-lg font-bold mb-4 text-red-600">Productos con stock bajo o agotado</h2>
           {datos.stockBajo.length === 0
             ? <p className="text-gray-400">Todos los productos tienen stock suficiente</p>
-            : <table className="w-full text-sm">
-                <thead className="bg-gray-100">
-                  <tr>
-                    <th className="p-2 text-left">Producto</th>
-                    <th className="p-2 text-right">Stock actual</th>
-                    <th className="p-2 text-right">Mínimo</th>
-                    <th className="p-2 text-left">Estado</th>
-                  </tr>
-                </thead>
-                <tbody>
+            : <>
+                {/* Mobile cards */}
+                <div className="md:hidden space-y-2">
                   {datos.stockBajo.map(p => (
-                    <tr key={p.id_producto} className="border-t">
-                      <td className="p-2">{p.nombre}</td>
-                      <td className="p-2 text-right font-semibold">{p.stock_actual}</td>
-                      <td className="p-2 text-right">{p.stock_minimo}</td>
-                      <td className="p-2">
+                    <div key={p.id_producto} className="border rounded p-3 bg-gray-50">
+                      <p className="font-semibold text-sm">{p.nombre}</p>
+                      <div className="flex justify-between text-sm mt-1">
+                        <span className="text-gray-500">Stock: <strong>{p.stock_actual}</strong> / mín {p.stock_minimo}</span>
                         {p.stock_actual <= 0
                           ? <span className="text-red-600 font-semibold">Agotado</span>
                           : <span className="text-orange-500 font-semibold">Stock bajo</span>}
-                      </td>
-                    </tr>
+                      </div>
+                    </div>
                   ))}
-                </tbody>
-              </table>
+                </div>
+                {/* Desktop table */}
+                <table className="hidden md:table w-full text-sm">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th className="p-2 text-left">Producto</th>
+                      <th className="p-2 text-right">Stock actual</th>
+                      <th className="p-2 text-right">Mínimo</th>
+                      <th className="p-2 text-left">Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {datos.stockBajo.map(p => (
+                      <tr key={p.id_producto} className="border-t">
+                        <td className="p-2">{p.nombre}</td>
+                        <td className="p-2 text-right font-semibold">{p.stock_actual}</td>
+                        <td className="p-2 text-right">{p.stock_minimo}</td>
+                        <td className="p-2">
+                          {p.stock_actual <= 0
+                            ? <span className="text-red-600 font-semibold">Agotado</span>
+                            : <span className="text-orange-500 font-semibold">Stock bajo</span>}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </>
           }
         </div>
 
         <div className="bg-white rounded-lg shadow p-5">
           <h2 className="text-lg font-bold mb-4">Últimas ventas</h2>
-          <table className="w-full text-sm">
+          {/* Mobile cards */}
+          <div className="md:hidden space-y-2">
+            {datos.ultimasVentas.map(v => (
+              <div key={v.id_venta} className="border rounded p-3 bg-gray-50">
+                <div className="flex justify-between items-center">
+                  <span className="font-semibold text-sm">#{v.id_venta} · {v.nombre_cliente || 'Sin cliente'}</span>
+                  <span className={`text-sm font-semibold ${v.estado === 'Completada' ? 'text-green-600' : v.estado === 'Cancelada' ? 'text-red-500' : 'text-orange-500'}`}>
+                    {v.estado}
+                  </span>
+                </div>
+                <div className="flex justify-between text-sm text-gray-500 mt-1">
+                  <span>{v.metodo_pago}</span>
+                  <span className="font-semibold text-gray-800">${Number(v.total_venta).toLocaleString()}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* Desktop table */}
+          <table className="hidden md:table w-full text-sm">
             <thead className="bg-gray-100">
               <tr>
                 <th className="p-2 text-left">#</th>

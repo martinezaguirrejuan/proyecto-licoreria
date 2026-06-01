@@ -132,7 +132,28 @@ function Empleados() {
         </div>
       )}
 
-      <div className="overflow-x-auto">
+      {/* Mobile cards */}
+      <div className="md:hidden space-y-3">
+        {empleados.map(e => (
+          <div key={e.cedula} className="bg-white rounded-lg shadow p-4">
+            <div className="flex justify-between items-start">
+              <div>
+                <p className="font-semibold">{e.nombre}</p>
+                <p className="text-sm text-gray-500">{e.cargo} · CC: {e.cedula}</p>
+                <p className="text-sm text-gray-500">{e.telefono}</p>
+                <p className="text-sm text-gray-500">Salario: ${Number(e.salario).toLocaleString()}</p>
+                {e.dias_labora && <p className="text-sm text-gray-500">{e.dias_labora}</p>}
+              </div>
+              <div className="flex flex-col gap-1 ml-2">
+                <button onClick={() => editarEmpleado(e)} className="bg-blue-500 text-white px-3 py-1 rounded text-sm">Editar</button>
+                <button onClick={() => eliminarEmpleado(e.cedula)} className="bg-red-500 text-white px-3 py-1 rounded text-sm">Eliminar</button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      {/* Desktop table */}
+      <div className="hidden md:block overflow-x-auto">
       <table className="w-full bg-white rounded-lg shadow">
         <thead className="bg-gray-800 text-white">
           <tr>

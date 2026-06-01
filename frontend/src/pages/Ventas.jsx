@@ -258,7 +258,41 @@ function Ventas() {
         </div>
       )}
 
-      <div className="overflow-x-auto">
+      {/* Mobile cards */}
+      <div className="md:hidden space-y-3">
+        {ventas.map(v => (
+          <div key={v.id_venta} className="bg-white rounded-lg shadow p-4">
+            <div className="flex justify-between items-start">
+              <div className="flex-1">
+                <div className="flex justify-between">
+                  <span className="font-semibold">#{v.id_venta} · {v.nombre_cliente || 'Sin cliente'}</span>
+                  <span className={`text-sm font-semibold ${v.estado === 'Completada' ? 'text-green-600' : v.estado === 'Cancelada' ? 'text-red-500' : 'text-orange-500'}`}>{v.estado}</span>
+                </div>
+                <p className="text-sm text-gray-500">{new Date(v.fecha_venta).toLocaleDateString('es-CO')} · {v.nombre_empleado}</p>
+                <p className="text-sm text-gray-500">{v.metodo_pago} · <strong className="text-gray-800">${Number(v.total_venta).toLocaleString()}</strong></p>
+              </div>
+            </div>
+            <div className="flex gap-2 mt-2">
+              <button onClick={() => verDetalle(v.id_venta)} className="bg-gray-600 text-white px-3 py-1 rounded text-sm">Detalle</button>
+              <button onClick={() => { setVentaEditando(v.id_venta); setFormEditar({ estado: v.estado, metodo_pago: v.metodo_pago }) }} className="bg-blue-500 text-white px-3 py-1 rounded text-sm">Editar</button>
+              <button onClick={() => eliminarVenta(v.id_venta)} className="bg-red-500 text-white px-3 py-1 rounded text-sm">Eliminar</button>
+            </div>
+            {detalleAbierto === v.id_venta && (
+              <div className="mt-3 border-t pt-3">
+                <p className="text-sm font-semibold mb-2">Productos:</p>
+                {detalle.map(d => (
+                  <div key={d.id_detalle_venta} className="flex justify-between text-sm border-b py-1">
+                    <span>{d.nombre_producto} x{d.cantidad}</span>
+                    <span>${Number(d.subtotal).toLocaleString()}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      {/* Desktop table */}
+      <div className="hidden md:block overflow-x-auto">
       <table className="w-full bg-white rounded-lg shadow">
         <thead className="bg-gray-800 text-white">
           <tr>

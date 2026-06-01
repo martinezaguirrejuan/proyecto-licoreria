@@ -209,7 +209,37 @@ function Compras() {
         </div>
       )}
 
-      <div className="overflow-x-auto">
+      {/* Mobile cards */}
+      <div className="md:hidden space-y-3">
+        {compras.map(c => (
+          <div key={c.id_compra} className="bg-white rounded-lg shadow p-4">
+            <div className="flex justify-between items-start">
+              <div>
+                <p className="font-semibold">#{c.id_compra} · {c.nombre_proveedor}</p>
+                <p className="text-sm text-gray-500">{new Date(c.fecha_compra).toLocaleDateString('es-CO')} · {c.estado}</p>
+                <p className="text-sm font-semibold">${Number(c.total_compra).toLocaleString()}</p>
+              </div>
+            </div>
+            <div className="flex gap-2 mt-2">
+              <button onClick={() => verDetalle(c.id_compra)} className="bg-gray-600 text-white px-3 py-1 rounded text-sm">Detalle</button>
+              <button onClick={() => { setCompraEditando(c.id_compra); setEstadoEditar(c.estado) }} className="bg-blue-500 text-white px-3 py-1 rounded text-sm">Editar estado</button>
+            </div>
+            {detalleAbierto === c.id_compra && (
+              <div className="mt-3 border-t pt-3">
+                <p className="text-sm font-semibold mb-2">Productos:</p>
+                {detalle.map(d => (
+                  <div key={d.id_detalle_compra} className="flex justify-between text-sm border-b py-1">
+                    <span>{d.nombre_producto} x{d.cantidad}</span>
+                    <span>${Number(d.subtotal).toLocaleString()}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      {/* Desktop table */}
+      <div className="hidden md:block overflow-x-auto">
       <table className="w-full bg-white rounded-lg shadow">
         <thead className="bg-gray-800 text-white">
           <tr>
