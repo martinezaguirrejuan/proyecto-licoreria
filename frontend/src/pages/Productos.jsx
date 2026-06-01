@@ -7,15 +7,15 @@ function Productos() {
   const [productoEditando, setProductoEditando] = useState(null)
 
   useEffect(() => {
-    fetch('http://localhost:3000/productos')
+    fetch(`${import.meta.env.VITE_API_URL}/productos`)
       .then(res => res.json())
       .then(data => setProductos(data))
   }, [])
 
   const guardarProducto = () => {
     const url = productoEditando
-      ? `http://localhost:3000/productos/${productoEditando}`
-      : 'http://localhost:3000/productos'
+      ? `${import.meta.env.VITE_API_URL}/productos/${productoEditando}`
+      : `${import.meta.env.VITE_API_URL}/productos`
     const method = productoEditando ? 'PUT' : 'POST'
 
     fetch(url, {
@@ -27,17 +27,17 @@ function Productos() {
       .then(() => {
         setMostrarFormulario(false)
         setProductoEditando(null)
-        fetch('http://localhost:3000/productos')
+        fetch(`${import.meta.env.VITE_API_URL}/productos`)
           .then(res => res.json())
           .then(data => setProductos(data))
       })
   }
 
   const eliminarProducto = (id) => {
-    fetch(`http://localhost:3000/productos/${id}`, { method: 'DELETE' })
+    fetch(`${import.meta.env.VITE_API_URL}/productos/${id}`, { method: 'DELETE' })
       .then(res => res.json())
       .then(() => {
-        fetch('http://localhost:3000/productos')
+        fetch(`${import.meta.env.VITE_API_URL}/productos`)
           .then(res => res.json())
           .then(data => setProductos(data))
       })

@@ -7,15 +7,15 @@ function Proveedores() {
   const [form, setForm] = useState({ nit: '', nombre_empresa: '', telefono: '', email: '', persona_contacto: '' })
 
   useEffect(() => {
-    fetch('http://localhost:3000/proveedores')
+    fetch(`${import.meta.env.VITE_API_URL}/proveedores`)
       .then(res => res.json())
       .then(data => setProveedores(data))
   }, [])
 
   const guardarProveedor = () => {
     const url = proveedorEditando
-      ? `http://localhost:3000/proveedores/${proveedorEditando}`
-      : 'http://localhost:3000/proveedores'
+      ? `${import.meta.env.VITE_API_URL}/proveedores/${proveedorEditando}`
+      : `${import.meta.env.VITE_API_URL}/proveedores`
     const method = proveedorEditando ? 'PUT' : 'POST'
 
     fetch(url, {
@@ -27,7 +27,7 @@ function Proveedores() {
       .then(() => {
         setMostrarFormulario(false)
         setProveedorEditando(null)
-        fetch('http://localhost:3000/proveedores')
+        fetch(`${import.meta.env.VITE_API_URL}/proveedores`)
           .then(res => res.json())
           .then(data => setProveedores(data))
       })
@@ -40,10 +40,10 @@ function Proveedores() {
   }
 
   const eliminarProveedor = (nit) => {
-    fetch(`http://localhost:3000/proveedores/${nit}`, { method: 'DELETE' })
+    fetch(`${import.meta.env.VITE_API_URL}/proveedores/${nit}`, { method: 'DELETE' })
       .then(res => res.json())
       .then(() => {
-        fetch('http://localhost:3000/proveedores')
+        fetch(`${import.meta.env.VITE_API_URL}/proveedores`)
           .then(res => res.json())
           .then(data => setProveedores(data))
       })

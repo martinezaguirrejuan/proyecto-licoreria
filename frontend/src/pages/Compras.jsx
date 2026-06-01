@@ -22,15 +22,15 @@ function Compras() {
   const [precioUnitario, setPrecioUnitario] = useState('')
 
   const cargarCompras = () => {
-    fetch('http://localhost:3000/compras')
+    fetch(`${import.meta.env.VITE_API_URL}/compras`)
       .then(res => res.json())
       .then(data => setCompras(data))
   }
 
   useEffect(() => {
     cargarCompras()
-    fetch('http://localhost:3000/proveedores').then(res => res.json()).then(data => setProveedores(data))
-    fetch('http://localhost:3000/productos').then(res => res.json()).then(data => setProductos(data))
+    fetch(`${import.meta.env.VITE_API_URL}/proveedores`).then(res => res.json()).then(data => setProveedores(data))
+    fetch(`${import.meta.env.VITE_API_URL}/productos`).then(res => res.json()).then(data => setProductos(data))
   }, [])
 
   const agregarAlCarrito = () => {
@@ -85,7 +85,7 @@ function Compras() {
       }))
     }
 
-    fetch('http://localhost:3000/compras', {
+    fetch(`${import.meta.env.VITE_API_URL}/compras`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
@@ -102,13 +102,13 @@ function Compras() {
 
   const verDetalle = (id) => {
     if (detalleAbierto === id) { setDetalleAbierto(null); setDetalle([]); return }
-    fetch(`http://localhost:3000/compras/${id}/detalle`)
+    fetch(`${import.meta.env.VITE_API_URL}/compras/${id}/detalle`)
       .then(res => res.json())
       .then(data => { setDetalle(data); setDetalleAbierto(id) })
   }
 
   const guardarEdicion = (id) => {
-    fetch(`http://localhost:3000/compras/${id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/compras/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ estado: estadoEditar })
@@ -118,7 +118,7 @@ function Compras() {
   }
 
   const eliminarCompra = (id) => {
-    fetch(`http://localhost:3000/compras/${id}`, { method: 'DELETE' })
+    fetch(`${import.meta.env.VITE_API_URL}/compras/${id}`, { method: 'DELETE' })
       .then(res => res.json())
       .then(() => cargarCompras())
   }
@@ -131,7 +131,7 @@ function Compras() {
         onClick={() => {
           setMostrarFormulario(true)
           setCarrito([])
-          fetch('http://localhost:3000/productos').then(res => res.json()).then(data => setProductos(data))
+          fetch(`${import.meta.env.VITE_API_URL}/productos`).then(res => res.json()).then(data => setProductos(data))
         }}
         className="mb-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
       >

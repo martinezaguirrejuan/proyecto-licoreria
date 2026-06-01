@@ -7,15 +7,15 @@ function Clientes() {
   const [form, setForm] = useState({ cedula: '', nombre: '', telefono: '', email: '', direccion: '' })
 
   useEffect(() => {
-    fetch('http://localhost:3000/clientes')
+    fetch(`${import.meta.env.VITE_API_URL}/clientes`)
       .then(res => res.json())
       .then(data => setClientes(data))
   }, [])
 
   const guardarCliente = () => {
     const url = clienteEditando
-      ? `http://localhost:3000/clientes/${clienteEditando}`
-      : 'http://localhost:3000/clientes'
+      ? `${import.meta.env.VITE_API_URL}/clientes/${clienteEditando}`
+      : `${import.meta.env.VITE_API_URL}/clientes`
     const method = clienteEditando ? 'PUT' : 'POST'
 
     fetch(url, {
@@ -27,7 +27,7 @@ function Clientes() {
       .then(() => {
         setMostrarFormulario(false)
         setClienteEditando(null)
-        fetch('http://localhost:3000/clientes')
+        fetch(`${import.meta.env.VITE_API_URL}/clientes`)
           .then(res => res.json())
           .then(data => setClientes(data))
       })
@@ -40,10 +40,10 @@ function Clientes() {
   }
 
   const eliminarCliente = (cedula) => {
-    fetch(`http://localhost:3000/clientes/${cedula}`, { method: 'DELETE' })
+    fetch(`${import.meta.env.VITE_API_URL}/clientes/${cedula}`, { method: 'DELETE' })
       .then(res => res.json())
       .then(() => {
-        fetch('http://localhost:3000/clientes')
+        fetch(`${import.meta.env.VITE_API_URL}/clientes`)
           .then(res => res.json())
           .then(data => setClientes(data))
       })

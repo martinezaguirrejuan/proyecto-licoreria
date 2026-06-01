@@ -12,7 +12,7 @@ function Empleados() {
   })
 
   const cargarEmpleados = () => {
-    fetch('http://localhost:3000/empleados')
+    fetch(`${import.meta.env.VITE_API_URL}/empleados`)
       .then(res => res.json())
       .then(data => setEmpleados(data))
   }
@@ -35,8 +35,8 @@ function Empleados() {
 
   const guardarEmpleado = () => {
     const url = empleadoEditando
-      ? `http://localhost:3000/empleados/${empleadoEditando}`
-      : 'http://localhost:3000/empleados'
+      ? `${import.meta.env.VITE_API_URL}/empleados/${empleadoEditando}`
+      : `${import.meta.env.VITE_API_URL}/empleados`
     const method = empleadoEditando ? 'PUT' : 'POST'
 
     const body = {
@@ -74,7 +74,7 @@ function Empleados() {
   }
 
   const eliminarEmpleado = (cedula) => {
-    fetch(`http://localhost:3000/empleados/${cedula}`, { method: 'DELETE' })
+    fetch(`${import.meta.env.VITE_API_URL}/empleados/${cedula}`, { method: 'DELETE' })
       .then(res => res.json())
       .then(() => cargarEmpleados())
   }

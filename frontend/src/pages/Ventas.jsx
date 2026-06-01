@@ -23,16 +23,16 @@ function Ventas() {
   const [cantidad, setCantidad] = useState(1)
 
   const cargarVentas = () => {
-    fetch('http://localhost:3000/ventas')
+    fetch(`${import.meta.env.VITE_API_URL}/ventas`)
       .then(res => res.json())
       .then(data => setVentas(data))
   }
 
   useEffect(() => {
     cargarVentas()
-    fetch('http://localhost:3000/clientes').then(res => res.json()).then(data => setClientes(data))
-    fetch('http://localhost:3000/empleados').then(res => res.json()).then(data => setEmpleados(data))
-    fetch('http://localhost:3000/productos').then(res => res.json()).then(data => setProductos(data))
+    fetch(`${import.meta.env.VITE_API_URL}/clientes`).then(res => res.json()).then(data => setClientes(data))
+    fetch(`${import.meta.env.VITE_API_URL}/empleados`).then(res => res.json()).then(data => setEmpleados(data))
+    fetch(`${import.meta.env.VITE_API_URL}/productos`).then(res => res.json()).then(data => setProductos(data))
   }, [])
 
   const agregarAlCarrito = () => {
@@ -93,7 +93,7 @@ function Ventas() {
       }))
     }
 
-    fetch('http://localhost:3000/ventas', {
+    fetch(`${import.meta.env.VITE_API_URL}/ventas`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
@@ -117,7 +117,7 @@ function Ventas() {
       setDetalle([])
       return
     }
-    fetch(`http://localhost:3000/ventas/${id}/detalle`)
+    fetch(`${import.meta.env.VITE_API_URL}/ventas/${id}/detalle`)
       .then(res => res.json())
       .then(data => {
         setDetalle(data)
@@ -126,7 +126,7 @@ function Ventas() {
   }
 
   const guardarEdicion = (id) => {
-    fetch(`http://localhost:3000/ventas/${id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/ventas/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formEditar)
@@ -139,7 +139,7 @@ function Ventas() {
   }
 
   const eliminarVenta = (id) => {
-    fetch(`http://localhost:3000/ventas/${id}`, { method: 'DELETE' })
+    fetch(`${import.meta.env.VITE_API_URL}/ventas/${id}`, { method: 'DELETE' })
       .then(res => res.json())
       .then(() => cargarVentas())
   }
@@ -152,7 +152,7 @@ function Ventas() {
         onClick={() => {
         setMostrarFormulario(true)
         setCarrito([])
-        fetch('http://localhost:3000/productos').then(res => res.json()).then(data => setProductos(data))
+        fetch(`${import.meta.env.VITE_API_URL}/productos`).then(res => res.json()).then(data => setProductos(data))
       }}
         className="mb-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
       >

@@ -4,7 +4,7 @@ function Dashboard() {
   const [datos, setDatos] = useState(null)
 
   useEffect(() => {
-    fetch('http://localhost:3000/dashboard')
+    fetch(`${import.meta.env.VITE_API_URL}/dashboard`)
       .then(res => res.json())
       .then(data => setDatos(data))
   }, [])
