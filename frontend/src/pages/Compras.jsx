@@ -104,7 +104,8 @@ function Compras() {
     if (detalleAbierto === id) { setDetalleAbierto(null); setDetalle([]); return }
     fetch(`${import.meta.env.VITE_API_URL}/compras/${id}/detalle`)
       .then(res => res.json())
-      .then(data => { setDetalle(data); setDetalleAbierto(id) })
+      .then(data => { setDetalle(Array.isArray(data) ? data : []); setDetalleAbierto(id) })
+      .catch(() => { setDetalle([]); setDetalleAbierto(id) })
   }
 
   const guardarEdicion = (id) => {
@@ -257,12 +258,14 @@ function Compras() {
             {detalleAbierto === c.id_compra && (
               <div className="mt-3 border-t pt-3">
                 <p className="text-sm font-semibold mb-2">Productos:</p>
-                {detalle.map(d => (
-                  <div key={d.id_detalle_compra} className="flex justify-between text-sm border-b py-1">
-                    <span>{d.nombre_producto} x{d.cantidad}</span>
-                    <span>${Number(d.subtotal).toLocaleString()}</span>
-                  </div>
-                ))}
+                {detalle.length === 0
+                  ? <p className="text-sm text-gray-400">Sin productos registrados</p>
+                  : detalle.map(d => (
+                    <div key={d.id_detalle_compra} className="flex justify-between text-sm border-b py-1">
+                      <span>{d.nombre_producto} x{d.cantidad}</span>
+                      <span>${Number(d.subtotal).toLocaleString()}</span>
+                    </div>
+                  ))}
               </div>
             )}
           </div>
@@ -324,14 +327,16 @@ function Compras() {
                         </tr>
                       </thead>
                       <tbody>
-                        {detalle.map(d => (
-                          <tr key={d.id_detalle_compra} className="border-t">
-                            <td className="p-2">{d.nombre_producto}</td>
-                            <td className="p-2 text-right">${Number(d.precio_unitario).toLocaleString()}</td>
-                            <td className="p-2 text-right">{d.cantidad}</td>
-                            <td className="p-2 text-right">${Number(d.subtotal).toLocaleString()}</td>
-                          </tr>
-                        ))}
+                        {detalle.length === 0
+                          ? <tr><td colSpan="4" className="p-2 text-center text-gray-400">Sin productos registrados</td></tr>
+                          : detalle.map(d => (
+                            <tr key={d.id_detalle_compra} className="border-t">
+                              <td className="p-2">{d.nombre_producto}</td>
+                              <td className="p-2 text-right">${Number(d.precio_unitario).toLocaleString()}</td>
+                              <td className="p-2 text-right">{d.cantidad}</td>
+                              <td className="p-2 text-right">${Number(d.subtotal).toLocaleString()}</td>
+                            </tr>
+                          ))}
                       </tbody>
                     </table>
                   </td>
