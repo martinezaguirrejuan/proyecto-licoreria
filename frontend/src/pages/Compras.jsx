@@ -159,16 +159,18 @@ function Compras() {
 
           <div className="border-t pt-4 mb-4">
             <p className="font-semibold mb-2">Agregar productos:</p>
-            <div className="flex gap-2">
-              <select value={productoSeleccionado} className="border p-2 rounded flex-1" onChange={e => setProductoSeleccionado(e.target.value)}>
+            <div className="flex flex-col gap-2">
+              <select value={productoSeleccionado} className="border p-2 rounded w-full" onChange={e => setProductoSeleccionado(e.target.value)}>
                 <option value="">-- Seleccionar producto --</option>
                 {productos.map(p => (
                   <option key={p.id_producto} value={p.id_producto}>{p.nombre}</option>
                 ))}
               </select>
-              <input type="number" min="1" placeholder="Cantidad" value={cantidad} onChange={e => setCantidad(parseInt(e.target.value))} className="border p-2 rounded w-28" />
-              <input type="number" min="0" placeholder="Precio unitario" value={precioUnitario} onChange={e => setPrecioUnitario(e.target.value)} className="border p-2 rounded w-36" />
-              <button onClick={agregarAlCarrito} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Agregar</button>
+              <div className="flex gap-2">
+                <input type="number" min="1" placeholder="Cantidad" value={cantidad} onChange={e => setCantidad(parseInt(e.target.value))} className="border p-2 rounded flex-1" />
+                <input type="number" min="0" placeholder="Precio unitario" value={precioUnitario} onChange={e => setPrecioUnitario(e.target.value)} className="border p-2 rounded flex-1" />
+                <button onClick={agregarAlCarrito} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Agregar</button>
+              </div>
             </div>
           </div>
 
