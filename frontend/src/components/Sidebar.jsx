@@ -30,6 +30,7 @@ function Sidebar() {
           <NavLink to="/empleados" onClick={() => setOpen(false)} className={({ isActive }) => isActive ? activo : inactivo}>Empleados</NavLink>
           <NavLink to="/ventas" onClick={() => setOpen(false)} className={({ isActive }) => isActive ? activo : inactivo}>Ventas</NavLink>
           <NavLink to="/compras" onClick={() => setOpen(false)} className={({ isActive }) => isActive ? activo : inactivo}>Compras</NavLink>
+          <NavLink to="/reportes" onClick={() => setOpen(false)} className={({ isActive }) => isActive ? activo : inactivo}>Reportes</NavLink>
         </nav>
       </div>
     </>

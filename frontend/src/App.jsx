@@ -7,6 +7,7 @@ import Empleados from './pages/Empleados'
 import Ventas from './pages/Ventas'
 import Compras from './pages/Compras'
 import Dashboard from './pages/Dashboard'
+import Reportes from './pages/Reportes'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/empleados" element={<Empleados />} />
             <Route path="/ventas" element={<Ventas />} />
             <Route path="/compras" element={<Compras />} />
+            <Route path="/reportes" element={<Reportes />} />
           </Routes>
         </div>
       </div>

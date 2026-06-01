@@ -31,6 +31,9 @@ app.use('/compras', comprasRoutes);
 const dashboardRoutes = require('./routes/dashboard');
 app.use('/dashboard', dashboardRoutes);
 
+const reportesRoutes = require('./routes/reportes');
+app.use('/reportes', reportesRoutes);
+
 app.get('/', (req, res) => {
   res.json({ mensaje: 'Backend Licorería funcionando' });
 });
