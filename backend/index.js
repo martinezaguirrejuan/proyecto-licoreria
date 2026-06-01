@@ -10,10 +10,17 @@ app.use(express.json());
 const db = require('./db');
 const productosRoutes = require('./routes/productos');
 
+
 app.use('/productos', productosRoutes);
 
 const clientesRoutes = require('./routes/clientes');
-  app.use('/clientes', clientesRoutes);    
+  app.use('/clientes', clientesRoutes);  
+  
+ const proveedoresRoutes = require('./routes/proveedores');
+  app.use('/proveedores', proveedoresRoutes);   
+
+ const empleadosRoutes = require('./routes/empleados');                        
+  app.use('/empleados', empleadosRoutes);
 
 app.get('/', (req, res) => {
   res.json({ mensaje: 'Backend Licorería funcionando' });
