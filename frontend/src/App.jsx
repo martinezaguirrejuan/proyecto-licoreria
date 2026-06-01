@@ -11,9 +11,9 @@ import Dashboard from './pages/Dashboard'
 function App() {
   return (
     <BrowserRouter>
-      <div className="flex min-h-screen bg-gray-100">
+      <div className="flex min-h-screen bg-gray-100 overflow-x-hidden">
         <Sidebar />
-        <div className="flex-1 pt-12 md:pt-0">
+        <div className="flex-1 min-w-0 pt-12 md:pt-0">
           <Routes>
             <Route path="/" element={<Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={<Dashboard />} />
