@@ -175,7 +175,7 @@ function Compras() {
           </div>
 
           {carrito.length > 0 && (
-            <div className="mb-4">
+            <div className="mb-4 overflow-x-auto">
               <table className="w-full border rounded">
                 <thead className="bg-gray-100">
                   <tr>
@@ -222,10 +222,23 @@ function Compras() {
                 <p className="text-sm font-semibold">${Number(c.total_compra).toLocaleString()}</p>
               </div>
             </div>
-            <div className="flex gap-2 mt-2">
-              <button onClick={() => verDetalle(c.id_compra)} className="bg-gray-600 text-white px-3 py-1 rounded text-sm">Detalle</button>
-              <button onClick={() => { setCompraEditando(c.id_compra); setEstadoEditar(c.estado) }} className="bg-blue-500 text-white px-3 py-1 rounded text-sm">Editar estado</button>
-            </div>
+            {compraEditando === c.id_compra
+              ? <div className="mt-3 space-y-2">
+                  <select value={estadoEditar} className="border p-2 rounded w-full" onChange={e => setEstadoEditar(e.target.value)}>
+                    <option value="Completada">Completada</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Cancelada">Cancelada</option>
+                  </select>
+                  <div className="flex gap-2">
+                    <button onClick={() => guardarEdicion(c.id_compra)} className="bg-green-500 text-white px-3 py-1 rounded text-sm">Guardar</button>
+                    <button onClick={() => setCompraEditando(null)} className="bg-gray-400 text-white px-3 py-1 rounded text-sm">Cancelar</button>
+                  </div>
+                </div>
+              : <div className="flex gap-2 mt-2">
+                  <button onClick={() => verDetalle(c.id_compra)} className="bg-gray-600 text-white px-3 py-1 rounded text-sm">Detalle</button>
+                  <button onClick={() => { setCompraEditando(c.id_compra); setEstadoEditar(c.estado) }} className="bg-blue-500 text-white px-3 py-1 rounded text-sm">Editar estado</button>
+                </div>
+            }
             {detalleAbierto === c.id_compra && (
               <div className="mt-3 border-t pt-3">
                 <p className="text-sm font-semibold mb-2">Productos:</p>

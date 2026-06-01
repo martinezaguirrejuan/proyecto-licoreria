@@ -225,7 +225,7 @@ function Ventas() {
           </div>
 
           {carrito.length > 0 && (
-            <div className="mb-4">
+            <div className="mb-4 overflow-x-auto">
               <table className="w-full border rounded">
                 <thead className="bg-gray-100">
                   <tr>
@@ -275,11 +275,31 @@ function Ventas() {
                 <p className="text-sm text-gray-500">{v.metodo_pago} · <strong className="text-gray-800">${Number(v.total_venta).toLocaleString()}</strong></p>
               </div>
             </div>
-            <div className="flex gap-2 mt-2">
-              <button onClick={() => verDetalle(v.id_venta)} className="bg-gray-600 text-white px-3 py-1 rounded text-sm">Detalle</button>
-              <button onClick={() => { setVentaEditando(v.id_venta); setFormEditar({ estado: v.estado, metodo_pago: v.metodo_pago }) }} className="bg-blue-500 text-white px-3 py-1 rounded text-sm">Editar</button>
-              <button onClick={() => eliminarVenta(v.id_venta)} className="bg-red-500 text-white px-3 py-1 rounded text-sm">Eliminar</button>
-            </div>
+            {ventaEditando === v.id_venta
+              ? <div className="mt-3 space-y-2">
+                  <select value={formEditar.metodo_pago} className="border p-2 rounded w-full" onChange={e => setFormEditar({...formEditar, metodo_pago: e.target.value})}>
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Tarjeta">Tarjeta</option>
+                    <option value="Transferencia">Transferencia</option>
+                    <option value="Nequi">Nequi</option>
+                    <option value="Daviplata">Daviplata</option>
+                  </select>
+                  <select value={formEditar.estado} className="border p-2 rounded w-full" onChange={e => setFormEditar({...formEditar, estado: e.target.value})}>
+                    <option value="Completada">Completada</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Cancelada">Cancelada</option>
+                  </select>
+                  <div className="flex gap-2">
+                    <button onClick={() => guardarEdicion(v.id_venta)} className="bg-green-500 text-white px-3 py-1 rounded text-sm">Guardar</button>
+                    <button onClick={() => setVentaEditando(null)} className="bg-gray-400 text-white px-3 py-1 rounded text-sm">Cancelar</button>
+                  </div>
+                </div>
+              : <div className="flex gap-2 mt-2">
+                  <button onClick={() => verDetalle(v.id_venta)} className="bg-gray-600 text-white px-3 py-1 rounded text-sm">Detalle</button>
+                  <button onClick={() => { setVentaEditando(v.id_venta); setFormEditar({ estado: v.estado, metodo_pago: v.metodo_pago }) }} className="bg-blue-500 text-white px-3 py-1 rounded text-sm">Editar</button>
+                  <button onClick={() => eliminarVenta(v.id_venta)} className="bg-red-500 text-white px-3 py-1 rounded text-sm">Eliminar</button>
+                </div>
+            }
             {detalleAbierto === v.id_venta && (
               <div className="mt-3 border-t pt-3">
                 <p className="text-sm font-semibold mb-2">Productos:</p>
