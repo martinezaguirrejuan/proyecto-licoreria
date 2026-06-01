@@ -10,6 +10,7 @@ function Sidebar() {
         Licorería
       </div>
       <nav className="flex flex-col p-4 gap-2">
+        <NavLink to="/dashboard" className={({ isActive }) => isActive ? activo : inactivo}>Dashboard</NavLink>
         <NavLink to="/productos" className={({ isActive }) => isActive ? activo : inactivo}>Productos</NavLink>
         <NavLink to="/clientes" className={({ isActive }) => isActive ? activo : inactivo}>Clientes</NavLink>
         <NavLink to="/proveedores" className={({ isActive }) => isActive ? activo : inactivo}>Proveedores</NavLink>

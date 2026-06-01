@@ -6,6 +6,7 @@ import Proveedores from './pages/Proveedores'
 import Empleados from './pages/Empleados'
 import Ventas from './pages/Ventas'
 import Compras from './pages/Compras'
+import Dashboard from './pages/Dashboard'
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <Sidebar />
         <div className="flex-1">
           <Routes>
-            <Route path="/" element={<Navigate to="/productos" />} />
+            <Route path="/" element={<Navigate to="/dashboard" />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/productos" element={<Productos />} />
             <Route path="/clientes" element={<Clientes />} />
             <Route path="/proveedores" element={<Proveedores />} />
