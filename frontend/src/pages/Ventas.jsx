@@ -225,31 +225,46 @@ function Ventas() {
           </div>
 
           {carrito.length > 0 && (
-            <div className="mb-4 overflow-x-auto">
-              <table className="w-full border rounded">
-                <thead className="bg-gray-100">
-                  <tr>
-                    <th className="p-2 text-left">Producto</th>
-                    <th className="p-2 text-right">Precio</th>
-                    <th className="p-2 text-right">Cantidad</th>
-                    <th className="p-2 text-right">Subtotal</th>
-                    <th className="p-2"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {carrito.map(item => (
-                    <tr key={item.id_producto} className="border-t">
-                      <td className="p-2">{item.nombre_producto}</td>
-                      <td className="p-2 text-right">${Number(item.precio_unitario).toLocaleString()}</td>
-                      <td className="p-2 text-right">{item.cantidad}</td>
-                      <td className="p-2 text-right">${Number(item.subtotal).toLocaleString()}</td>
-                      <td className="p-2 text-right">
-                        <button onClick={() => quitarDelCarrito(item.id_producto)} className="text-red-500 hover:text-red-700">✕</button>
-                      </td>
+            <div className="mb-4">
+              {/* Mobile carrito */}
+              <div className="md:hidden space-y-2 mb-2">
+                {carrito.map(item => (
+                  <div key={item.id_producto} className="flex justify-between items-center border rounded p-2 bg-gray-50">
+                    <div>
+                      <p className="text-sm font-semibold">{item.nombre_producto}</p>
+                      <p className="text-sm text-gray-500">${Number(item.precio_unitario).toLocaleString()} × {item.cantidad} = <strong>${Number(item.subtotal).toLocaleString()}</strong></p>
+                    </div>
+                    <button onClick={() => quitarDelCarrito(item.id_producto)} className="text-red-500 hover:text-red-700 ml-2 text-lg">✕</button>
+                  </div>
+                ))}
+              </div>
+              {/* Desktop carrito */}
+              <div className="hidden md:block overflow-x-auto">
+                <table className="w-full border rounded">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th className="p-2 text-left">Producto</th>
+                      <th className="p-2 text-right">Precio</th>
+                      <th className="p-2 text-right">Cantidad</th>
+                      <th className="p-2 text-right">Subtotal</th>
+                      <th className="p-2"></th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {carrito.map(item => (
+                      <tr key={item.id_producto} className="border-t">
+                        <td className="p-2">{item.nombre_producto}</td>
+                        <td className="p-2 text-right">${Number(item.precio_unitario).toLocaleString()}</td>
+                        <td className="p-2 text-right">{item.cantidad}</td>
+                        <td className="p-2 text-right">${Number(item.subtotal).toLocaleString()}</td>
+                        <td className="p-2 text-right">
+                          <button onClick={() => quitarDelCarrito(item.id_producto)} className="text-red-500 hover:text-red-700">✕</button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
               <p className="text-right font-bold text-lg mt-2">Total: ${Number(total).toLocaleString()}</p>
             </div>
           )}
