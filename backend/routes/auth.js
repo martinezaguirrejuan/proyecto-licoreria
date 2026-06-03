@@ -29,4 +29,24 @@
     });                                                                       
   });
 
+  router.put('/cambiar-password', async (req, res) => {
+    const { id_usuario, password_actual, password_nueva } = req.body;
+
+    const rows = await query(
+      'SELECT * FROM usuarios WHERE id_usuario = ? AND password = ?',
+      [id_usuario, password_actual]
+    );
+
+    if (rows.length === 0) {
+      return res.status(401).json({ error: 'Contraseña actual incorrecta' });
+    }
+
+    await query(
+      'UPDATE usuarios SET password = ? WHERE id_usuario = ?',
+      [password_nueva, id_usuario]
+    );
+
+    res.json({ mensaje: 'Contraseña actualizada' });
+  });
+
   module.exports = router;

@@ -10,6 +10,7 @@ import { useState } from 'react'
   import Dashboard from './pages/Dashboard'                                   
   import Reportes from './pages/Reportes'                                       
   import Login from './pages/Login'
+  import Perfil from './pages/Perfil'
                                                                                 
   function App() {                                                            
     const [usuario, setUsuario] = useState(null)
@@ -33,6 +34,7 @@ import { useState } from 'react'
               <Route path="/ventas" element={<Ventas />} />                     
               <Route path="/compras" element={<Compras />} />                   
               <Route path="/reportes" element={<Reportes />} />
+              <Route path="/perfil" element={<Perfil usuario={usuario} />} />
             </Routes>                                                           
           </div>                                                              
         </div>

@@ -45,6 +45,9 @@ function Sidebar({ usuario, onLogout }) {
         </nav>
         <div className="mt-auto p-4 border-t border-gray-700">
           <p className="text-sm text-gray-400 mb-2">{usuario?.nombre}</p>
+          <NavLink to="/perfil" onClick={() => setOpen(false)} className="block w-full text-center bg-gray-700 text-white py-2 rounded hover:bg-gray-600 text-sm mb-2">
+            Mi perfil
+          </NavLink>
           <button onClick={onLogout} className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 text-sm">
             Cerrar sesión
           </button>
