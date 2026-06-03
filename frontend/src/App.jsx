@@ -21,7 +21,7 @@ import { useState } from 'react'
     return (
       <BrowserRouter>
         <div className="flex min-h-screen bg-gray-100 overflow-x-hidden">
-          <Sidebar />                                                           
+          <Sidebar usuario={usuario} onLogout={() => setUsuario(null)} />
           <div className="flex-1 min-w-0 pt-12 md:pt-0">
             <Routes>                                                            
               <Route path="/" element={<Navigate to="/dashboard" />} />       
