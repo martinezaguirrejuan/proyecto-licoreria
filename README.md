@@ -12,12 +12,13 @@ Aplicación web completa para la gestión de una licorería. Desarrollada con Re
 
 - [x] Productos — CRUD completo
 - [x] Clientes — CRUD completo
-- [ ] Proveedores
-- [ ] Empleados
-- [ ] Ventas
-- [ ] Compras
-- [ ] Dashboard
-- [ ] Reportes
+- [x] Proveedores — CRUD completo
+- [x] Empleados — CRUD completo
+- [x] Ventas — crear con carrito, editar estado, ver detalle
+- [x] Compras — crear con carrito, editar estado, ver detalle
+- [x] Dashboard — tarjetas de resumen y stock bajo
+- [x] Reportes — 4 gráficas con Recharts
+- [x] Login — autenticación con roles (admin, vendedor, bodega)
 
 ## Cómo correrlo localmente
 
