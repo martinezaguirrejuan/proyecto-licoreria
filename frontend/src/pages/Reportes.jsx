@@ -1,6 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import html2canvas from 'html2canvas'
-import jsPDF from 'jspdf'
 import {
   BarChart, Bar, LineChart, Line, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
@@ -41,15 +39,8 @@ function Reportes() {
     mes: v.mes.substring(5) + '/' + v.mes.substring(0, 4)
   }))
 
-  const descargarPDF = async () => {
-    const elemento = reporteRef.current
-    const canvas = await html2canvas(elemento, { scale: 2 })
-    const imgData = canvas.toDataURL('image/png')
-    const pdf = new jsPDF('p', 'mm', 'a4')
-    const ancho = pdf.internal.pageSize.getWidth()
-    const alto = (canvas.height * ancho) / canvas.width
-    pdf.addImage(imgData, 'PNG', 0, 0, ancho, alto)
-    pdf.save('reportes-licoreria.pdf')
+  const descargarPDF = () => {
+    window.print()
   }
 
   return (
