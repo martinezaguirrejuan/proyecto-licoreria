@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 import {
   BarChart, Bar, LineChart, Line, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
@@ -7,6 +9,7 @@ import {
 const COLORES_PIE = ['#4f46e5', '#16a34a', '#dc2626', '#d97706', '#0891b2']
 
 function Reportes() {
+  const reporteRef = useRef(null)
   const [ventasDia, setVentasDia] = useState([])
   const [masVendidos, setMasVendidos] = useState([])
   const [porMetodo, setPorMetodo] = useState([])
@@ -38,11 +41,27 @@ function Reportes() {
     mes: v.mes.substring(5) + '/' + v.mes.substring(0, 4)
   }))
 
+  const descargarPDF = async () => {
+    const elemento = reporteRef.current
+    const canvas = await html2canvas(elemento, { scale: 2 })
+    const imgData = canvas.toDataURL('image/png')
+    const pdf = new jsPDF('p', 'mm', 'a4')
+    const ancho = pdf.internal.pageSize.getWidth()
+    const alto = (canvas.height * ancho) / canvas.width
+    pdf.addImage(imgData, 'PNG', 0, 0, ancho, alto)
+    pdf.save('reportes-licoreria.pdf')
+  }
+
   return (
     <div className="p-4 md:p-8">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">Reportes</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold text-gray-800">Reportes</h1>
+        <button onClick={descargarPDF} className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900">
+          Descargar PDF
+        </button>
+      </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+      <div ref={reporteRef} className="grid grid-cols-1 xl:grid-cols-2 gap-6">
 
         {/* Ventas últimos 7 días */}
         <div className="bg-white rounded-lg shadow p-4">
