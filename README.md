@@ -1,5 +1,7 @@
 # Sistema de Gestión - Licorería
 
+**Demo en vivo:** [proyecto-licoreria.vercel.app](https://proyecto-licoreria.vercel.app)
+
 Aplicación web completa para la gestión de una licorería. Desarrollada con React, Node.js, Express y MariaDB.
 
 ## Tecnologías
