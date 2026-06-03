@@ -47,6 +47,14 @@ npm run dev
 El backend corre en `http://localhost:3000`  
 El frontend corre en `http://localhost:5173`
 
+## Usuarios de prueba
+
+| Rol | Email | Contraseña |
+|-----|-------|-----------|
+| Admin | admin@licoreria.com | 1234 |
+| Vendedor | vendedor@licoreria.com | 1234 |
+| Bodega | bodega@licoreria.com | 1234 |
+
 ## Autor
 
 **Juan Fernando Martinez Aguirre**  
