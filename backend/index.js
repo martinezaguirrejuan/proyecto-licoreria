@@ -15,6 +15,11 @@ app.use('/productos', productosRoutes);
 
 const clientesRoutes = require('./routes/clientes');
   app.use('/clientes', clientesRoutes);  
+
+
+
+  const authRoutes = require('./routes/auth');                                  
+  app.use('/auth', authRoutes);    
   
  const proveedoresRoutes = require('./routes/proveedores');
   app.use('/proveedores', proveedoresRoutes);   
